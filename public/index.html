@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Meme + GIF Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>AI Gif + Caption + #Hashtag Generator</h1>
+
+  <div class="input-wrapper">
+  <input type="text" id="topic" placeholder="Enter a topic..." />
+  <button id="reset-btn" title="Reset"><span>&#x21bb;</span></button>
+</div>
+
+    <div class="buttons">
+      <button id="btn-gif">Generate GIF Only</button>
+      <button id="btn-caption">Generate Caption & Hashtags</button>
+      <button id="btn-both">Generate Both</button>
+    </div>
+
+    <div id="loader" class="hidden">
+      <div class="spinner"></div>
+      <p>Generating your content... Please Wait</p>
+    </div>
+
+    <div id="result">
+      <img id="gif" src="" alt="GIF" class="hidden" />
+      <p id="caption" class="hidden"></p>
+      <div id="hashtags" class="hidden"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
