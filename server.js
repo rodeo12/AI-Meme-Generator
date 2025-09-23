@@ -32,34 +32,34 @@ const fetchGif = async (topic) => {
 };
 
 // ----------------- Helper function to fetch caption + hashtags -----------------
-const fetchCaption = async (topic) => {
-  const prompt = `Create a short extreme funny meme caption and 3-5 trending funny social media hashtags for the topic: "${topic}".
-Respond ONLY in JSON format, like:
-{
-  "caption": "funny caption here",
-  "hashtags": ["#tag1", "#tag2", "#tag3"]
-}`;
+  const fetchCaption = async (topic) => {
+    const prompt = `Create a short extreme funny meme caption and 3-5 trending funny social media hashtags for the topic: "${topic}".
+  Respond ONLY in JSON format, like:
+  {
+    "caption": "funny caption here",
+    "hashtags": ["#tag1", "#tag2", "#tag3"]
+  }`;
 
-  const aiResult = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: prompt,
-  });
+    const aiResult = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+    });
 
-  let textResponse = aiResult?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-  textResponse = textResponse.replace(/```json\s*([\s\S]*?)```/, "$1").trim();
+    let textResponse = aiResult?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    textResponse = textResponse.replace(/```json\s*([\s\S]*?)```/, "$1").trim();
 
-  let caption = "Here’s your meme!";
-  let hashtags = [];
-  try {
-    const parsed = JSON.parse(textResponse);
-    caption = parsed.caption || caption;
-    hashtags = parsed.hashtags || [];
-  } catch (err) {
-    console.error("JSON parse error:", err);
-  }
+    let caption = "Here’s your meme!";
+    let hashtags = [];
+    try {
+      const parsed = JSON.parse(textResponse);
+      caption = parsed.caption || caption;
+      hashtags = parsed.hashtags || [];
+    } catch (err) {
+      console.error("JSON parse error:", err);
+    }
 
-  return { caption, hashtags };
-};
+    return { caption, hashtags };
+  };
 
 // ----------------- Route 1: GIF + Caption + Hashtags (original) -----------------
 app.post("/api/generate-meme", async (req, res) => {
